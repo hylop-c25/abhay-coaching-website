@@ -115,7 +115,7 @@
           </div>
           
           <div class="contact-right reveal">
-            <form class="form-card" onsubmit="event.preventDefault(); alert('Demo request submitted successfully! (Mock submission)');">
+            <form class="form-card" onsubmit="submitToWhatsApp(event)">
               <h3>Book a Free Demo Class</h3>
               
               <div class="form-row">
@@ -169,6 +169,34 @@
 
               <button type="submit" class="btn btn-dark" style="width: 100%;">Submit Demo Request →</button>
             </form>
+
+            <script>
+              function submitToWhatsApp(event) {
+                event.preventDefault();
+                
+                const name = document.getElementById('student-name').value;
+                const phone = document.getElementById('parent-phone').value;
+                const currentClass = document.getElementById('current-class').value;
+                const board = document.getElementById('board-stream').value;
+                const msg = document.getElementById('student-msg').value;
+                
+                let text = `*New Demo Request*%0A%0A`;
+                text += `*Student Name:* ${name}%0A`;
+                text += `*Contact:* ${phone}%0A`;
+                text += `*Class:* ${currentClass}%0A`;
+                text += `*Board/Stream:* ${board}`;
+                
+                if (msg.trim() !== '') {
+                  text += `%0A*Message:* ${msg}`;
+                }
+                
+                // Replace with actual WhatsApp number (include country code, no + or spaces)
+                const whatsappNumber = "919133111099";
+                const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${text}`;
+                
+                window.open(whatsappUrl, '_blank');
+              }
+            </script>
           </div>
         </div>
       </div>
